@@ -10,10 +10,10 @@ function profile() {
                     },
                     success: function (data, status) {
                         var da = jQuery.parseJSON(data);
-                        document.getElementById("sname").innerHTML = da.name;
-                        document.getElementById("sage").innerHTML = da.age;
-                        document.getElementById("smail").innerHTML = da.email;
-                        document.getElementById("smob").innerHTML = da.mobile;
+                        document.getElementById("sname").innerHTML = "Hi," + da.name;
+                        document.getElementById("sage").innerHTML = "Age:" + da.age;
+                        document.getElementById("smail").innerHTML = "Email:" + da.email;
+                        document.getElementById("smob").innerHTML = "Mobile:" + da.mobile;
                     }
                 });
         })
