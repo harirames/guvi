@@ -4,9 +4,9 @@ header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 
-require '../vendor/autoload.php';
+require '../assets/vendor/autoload.php';
 
-require "../vendor/predis/predis/autoload.php";
+require "../assets/vendor/predis/predis/autoload.php";
 
 Predis\Autoloader::register();
 if($_SERVER['REQUEST_METHOD']=="POST")

@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 
-require '../vendor/autoload.php';
+require '../assets/vendor/autoload.php';
 if($_SERVER['REQUEST_METHOD']=="POST")
 {
     $email=$_POST['email'];
