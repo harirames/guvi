@@ -2,12 +2,15 @@ function validateLogin(event) {
     var email = document.getElementsByName("email")[0].value;
     var password = document.getElementsByName("pass")[0].value;
     $(document).ready(function () {
-        $.post('http://localhost/Guvi/php/login.php',
-            {
+        $.ajax({
+            url: 'http://localhost/Guvi/php/login.php',
+            type: "POST",
+            data: {
                 email: email,
                 password: password
             },
-            function (data, status) {
+
+            success: function (data, status) {
                 if (data === "Wrong Password") {
                     alert(data);
                 }
@@ -21,7 +24,7 @@ function validateLogin(event) {
 
                 }
             }
-        );
+        });
     })
 
 }

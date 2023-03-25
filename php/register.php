@@ -16,12 +16,10 @@ if($_SERVER['REQUEST_METHOD']=="POST")
     $dbuser="root";
     $dbpass="";
     $dbname="guvi";
-    print($age);
-    print($mobile);
-    print($name);
-    print($dob);
+
     $mongoclient = new MongoDB\Client();
     $collection =  $mongoclient->guvi->user_details;
+
     if(!$mysqlconnection=mysqli_connect($dbhost,$dbuser,$dbpass,$dbname))
     {
         die("failed to connect!");
@@ -39,7 +37,7 @@ if($_SERVER['REQUEST_METHOD']=="POST")
     $result=$stmt->execute();
     $mongoresult = $collection->insertOne( [ 'name' => $name, 'age' => $age,'mobile' => $mobile, 'dob' => $dob,'email' => $email ] );
 
-    if($result)
+    if($result &&$mongoresult)
     {
         echo "Success";
     }

@@ -36,16 +36,19 @@ function reguser() {
     }
     else if (password == con_password) {
         $(document).ready(function () {
-            $.post('http://localhost/Guvi/php/register.php',
-                {
+            $.ajax({
+                url: 'http://localhost/Guvi/php/register.php',
+                type: "POST",
+                data: {
                     email: email,
                     password: password,
                     name: name,
                     mobile: mobileno,
                     dob: dob,
-                    age: age
+                    age: age,
+                    isup: false
                 },
-                function (data, status) {
+                success: function (data, status) {
                     if (data === "email already exists") {
                         alert(data);
                         window.location.replace("http://localhost/Guvi/register.html");
@@ -57,7 +60,8 @@ function reguser() {
                         alert("Registration Failed");
                         window.location.replace("http://localhost/Guvi/register.html");
                     }
-                });
+                }
+            });
         });
     }
     else {

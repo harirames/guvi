@@ -6,7 +6,8 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 require '../vendor/autoload.php';
 if($_SERVER['REQUEST_METHOD']=="POST")
 {
-    $email=$_POST['email'];
+    $update=$_POST['isup'];
+
 /*     $dbhost="localhost";
     $dbuser="root";
     $dbpass="";
@@ -31,17 +32,41 @@ if($_SERVER['REQUEST_METHOD']=="POST")
         }
    }
 } */
-$mongoclient = new MongoDB\Client();
+if(!$update){
+    $email=$_POST['email'];
+    $mongoclient = new MongoDB\Client();
  $collection =  $mongoclient->guvi->user_details;
 
 $result = $collection->find(['email'=>$email]);
 
-   //echo json_encode($result);
-
- foreach ($result as $userdetails) {
-   echo $userdetails;
+  foreach ($result as $userdetails) {
+    echo json_encode(array('name'=>$userdetails["name"],'age'=>$userdetails["age"],'mobile'=>$userdetails["mobile"],'email'=>$userdetails["email"]));
+ /*  echo $userdetails["name"];
+   echo $userdetails["age"];
+   echo $userdetails["mobile"];
+   echo $userdetails["email"];  */
    //var_dump($userdetails);
 }; 
+}else{
+    $oldem=$_POST['oldem'];
+    $dob=$_POST['dob'];
+    $name=$_POST['name'];
+    $mob=$_POST['mobile'];
+    $age=$_POST['age'];
+    $mongoclient = new MongoDB\Client();
+ $collection =  $mongoclient->guvi->user_details;
 
+$upresult = $collection->updateone( [ 'email' => $oldem ],
+   [ '$set' => [ 'name' => $name , 'age' => $age,'mobile' => $mob,'dob' => $dob ]]);
+$result = $collection->find(['email'=>$oldem]);
+  foreach ($result as $userdetails) {
+    echo json_encode(array('name'=>$userdetails["name"],'age'=>$userdetails["age"],'mobile'=>$userdetails["mobile"],'email'=>$userdetails["email"]));
+ /*  echo $userdetails["name"];
+   echo $userdetails["age"];
+   echo $userdetails["mobile"];
+   echo $userdetails["email"];  */
+   //var_dump($userdetails);
+}; 
+}
 
 }
